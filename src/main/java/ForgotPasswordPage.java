@@ -11,7 +11,7 @@ import static com.codeborne.selenide.WebDriverConditions.url;
 public class ForgotPasswordPage {
 
     //Адрес страницы восстановления пароля
-    public static String forgotPasswordPageAddress = "https://stellarburgers.nomoreparties.site/forgot-password";
+    private static final String FORGOT_PASSWORD_PAGE_URL = "https://stellarburgers.nomoreparties.site/forgot-password";
 
     //---Селекторы---
     //Ссылка "Войти" в теле страницы
@@ -28,7 +28,7 @@ public class ForgotPasswordPage {
     //Метод проверяет, что открыта страница восстановления пароля
     @Step("Check what forgot password page is open")
     public void forgotPasswordPageOpenCheck() {
-        webdriver().shouldHave(url(forgotPasswordPageAddress));
+        webdriver().shouldHave(url(FORGOT_PASSWORD_PAGE_URL));
     }
 
 }

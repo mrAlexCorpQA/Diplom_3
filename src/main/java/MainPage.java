@@ -1,4 +1,3 @@
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +12,7 @@ import static com.codeborne.selenide.WebDriverConditions.url;
 public class MainPage {
 
     //Адрес главной страницы сайта
-    public static String mainPageAddress = "https://stellarburgers.nomoreparties.site/";
+    public static final String MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/";
 
     //---Селекторы---
     //Кнопка "Личный кабинет" в хедере сайта
@@ -21,28 +20,32 @@ public class MainPage {
     private SelenideElement headerPersonalCabinet;
 
     //Кнопка "Войти в аккаунт" на главной странице сайта
-    @FindBy(how = How.XPATH, using = ".//div[@class='BurgerConstructor_basket__container__2fUl3 mt-10']/button")
+    @FindBy(how = How.XPATH, using = ".//button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg']")
     private SelenideElement mainPageLoginBotton;
 
-    //Коллекция разделов конструктора бургеров (селектор Булки, Соусы, Начинки) на главной странице сайта
-    @FindBy(how = How.XPATH, using = ".//div[@Style='display: flex;']/div")
-    private ElementsCollection burgerConstructorSelectorChapters;
+    //Раздел конструктора бургеров Булки (селектор) на главной странице сайта
+    @FindBy(how = How.XPATH, using = ".//span[text() = 'Булки']")
+    private SelenideElement bunChapterSelector;
 
-    //Флюоресцентная булка R2-D3. Первый элемент раздела Булки используется для проверки конструктора
-    @FindBy(how = How.XPATH, using = ".//img[@alt='Флюоресцентная булка R2-D3']")
-    private SelenideElement ingredientBunR2D3;
+    //Активный (выбранный) селектор конструктора бургеров Булки на главной странице сайта (используется в тесте по проверке перехода между табами)
+    @FindBy(how = How.XPATH, using = ".//div[@class = 'tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span[text() = 'Булки']")
+    private SelenideElement bunActiveChapterSelector;
 
-    //Соус Spicy-X. Первый элемент раздела Соусы используется для проверки конструктора
-    @FindBy(how = How.XPATH, using = ".//img[@alt='Соус Spicy-X']")
-    private SelenideElement ingredientSauceSpicyX;
+    //Раздел конструктора бургеров Соусы (селектор) на главной странице сайта
+    @FindBy(how = How.XPATH, using = ".//span[text() = 'Соусы']")
+    private SelenideElement souseChapterSelector;
 
-    //Мясо бессмертных моллюсков Protostomia. Первый элемент раздела Начинки используется для проверки конструктора
-    @FindBy(how = How.XPATH, using = ".//img[@alt='Мясо бессмертных моллюсков Protostomia']")
-    private SelenideElement ingredientMeatProtostomia;
+    //Активный (выбранный) селектор конструктора бургеров Соусы на главной странице сайта (используется в тесте по проверке перехода между табами)
+    @FindBy(how = How.XPATH, using = ".//div[@class = 'tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span[text() = 'Соусы']")
+    private SelenideElement souseActiveChapterSelector;
 
-    //Корзина для сборки бургера. Используется для проверки конструктора
-    @FindBy(how = How.XPATH, using = ".//ul[@class='BurgerConstructor_basket__list__l9dp_']")
-    private SelenideElement burgerConstructorBasket;
+    //Раздел конструктора бургеров Начинки (селектор) на главной странице сайта
+    @FindBy(how = How.XPATH, using = ".//span[text() = 'Начинки']")
+    private SelenideElement fillingChapterSelector;
+
+    //Активный (выбранный) селектор конструктора бургеров Соусы на главной странице сайта (используется в тесте по проверке перехода между табами)
+    @FindBy(how = How.XPATH, using = ".//div[@class = 'tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span[text() = 'Начинки']")
+    private SelenideElement fillingActiveChapterSelector;
 
 
     //---Методы---
@@ -61,32 +64,29 @@ public class MainPage {
     //Метод проверяет, что открыта главная страница
     @Step("Check what main page is open")
     public void mainPageOpenCheck() {
-        webdriver().shouldHave(url(mainPageAddress));
+        webdriver().shouldHave(url(MAIN_PAGE_URL));
     }
 
-    //Метод кликает на выбранный селектор раздела конструктора бургеров
-    @Step("Click on selector of burger constructor chapter in main page")
-    public void clickOnConstructorChapterSelector(int chapterNumber) {
-        $$(burgerConstructorSelectorChapters).get(chapterNumber).click();
-        $$(burgerConstructorSelectorChapters).get(chapterNumber).shouldHave(attribute("class", "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"), Duration.ofMillis(8000));
+    //Метод проверяет переход на селектор Булки раздела конструктора бургеров
+    @Step("Click on Bun selector of burger constructor chapter in main page")
+    public void bunSelectorCheck() {
+        $(souseChapterSelector).shouldBe(visible).click();
+        $(bunChapterSelector).shouldBe(visible).click();
+        $(bunActiveChapterSelector).shouldBe(exist, Duration.ofMillis(8000));
     }
 
-    //Метод перетаскивает выбранную булочку в корзину
-    @Step("Drag and Drop ingredient Bun to basket")
-    public void dragAndDropBunToBasket() {
-        ingredientBunR2D3.shouldBe(enabled).dragAndDropTo(burgerConstructorBasket);
+    //Метод проверяет переход на селектор Соусы раздела конструктора бургеров
+    @Step("Click on Souse selector of burger constructor chapter in main page")
+    public void souseSelectorCheck() {
+        $(souseChapterSelector).shouldBe(visible).click();
+        $(souseActiveChapterSelector).shouldBe(exist, Duration.ofMillis(8000));
     }
 
-    //Метод перетаскивает выбранный соус в корзину
-    @Step("Drag and Drop ingredient Sauce to basket")
-    public void dragAndDropSauceToBasket() {
-        ingredientSauceSpicyX.shouldBe(enabled).dragAndDropTo(burgerConstructorBasket);
-    }
-
-    //Метод перетаскивает выбранную начинку в корзину
-    @Step("Drag and Drop ingredient Filling to basket")
-    public void dragAndDropFillingToBasket() {
-        ingredientMeatProtostomia.dragAndDropTo(burgerConstructorBasket);
+    //Метод проверяет переход на селектор Начинки раздела конструктора бургеров
+    @Step("Click on Filling selector of burger constructor chapter in main page")
+    public void fillingSelectorCheck() {
+        $(fillingChapterSelector).shouldBe(visible).click();
+        $(fillingActiveChapterSelector).shouldBe(exist, Duration.ofMillis(8000));
     }
 
 

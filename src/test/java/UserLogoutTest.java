@@ -27,10 +27,10 @@ public class UserLogoutTest {
     @DisplayName("User registration abefore tests")
     @Description("User registration before tests")
     public static void userRegistrationBeforeTests() {
-        RegisterPage registerPage = open(RegisterPage.registerPageAddress, RegisterPage.class);
-        registerPage.fillRegFields(0, userName);
-        registerPage.fillRegFields(1, userEmail);
-        registerPage.fillRegFields(2, userCorrectPassword);
+        RegisterPage registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
+        registerPage.fillRegFieldName(userName);
+        registerPage.fillRegFieldEmail(userEmail);
+        registerPage.fillRegFieldPassword(userCorrectPassword);
         registerPage.clickOnRegButton();
     }
 
@@ -52,7 +52,7 @@ public class UserLogoutTest {
     @DisplayName("Check logout after click on logout button in Lk body page")
     @Description("Check logout after click on logout button in Lk body page test")
     public void lkLogoutCheckTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickBodyAuthButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.fillAuthForm(userEmail, userCorrectPassword);

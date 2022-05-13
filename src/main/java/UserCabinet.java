@@ -11,7 +11,7 @@ import static com.codeborne.selenide.WebDriverConditions.url;
 public class UserCabinet {
 
     //Адрес личного кабинета пользователя
-    public static String personalUserCabinet = "https://stellarburgers.nomoreparties.site/account/profile";
+    private static final String USER_CABINET_URL = "https://stellarburgers.nomoreparties.site/account/profile";
 
     //---Селекторы---
     //Ссылка "Конструктор" в хедере сайта
@@ -23,7 +23,7 @@ public class UserCabinet {
     private SelenideElement headerLogo;
 
     //Кнопка "Выход" (кнопка деавторизации) в теле сайта
-    @FindBy(how = How.XPATH, using = ".//li[@Class='Account_listItem__35dAP']/button[@Class='Account_button__14Yp3 text text_type_main-medium text_color_inactive']")
+    @FindBy(how = How.XPATH, using = ".//button[@Class='Account_button__14Yp3 text text_type_main-medium text_color_inactive']")
     private SelenideElement logoutButton;
 
 
@@ -31,7 +31,7 @@ public class UserCabinet {
     //Метод проверяет, что открыта страница личного кабинета
     @Step("Check what lk page is open")
     public void lkPageOpenCheck() {
-        webdriver().shouldHave(url(personalUserCabinet));
+        webdriver().shouldHave(url(USER_CABINET_URL));
     }
 
     //Метод кликает на логотип "StellarBurgers" в хедере сайта

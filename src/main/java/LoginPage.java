@@ -11,7 +11,7 @@ import static com.codeborne.selenide.WebDriverConditions.url;
 public class LoginPage {
 
     //Адрес страницы входа на сайт
-    public static String loginPageAddress = "https://stellarburgers.nomoreparties.site/login";
+    private static final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
 
     //---Селекторы---
     //Ссылка "Зарегистрироваться" в теле страницы
@@ -19,11 +19,11 @@ public class LoginPage {
     private SelenideElement registerLinkInBody;
 
     //Поле ввода "Email" области "Вход" в теле страницы
-    @FindBy(how = How.XPATH, using = ".//div[@class='input__container']/div[@class='input pr-6 pl-6 input_type_text input_size_default']/input")
+    @FindBy(how = How.XPATH, using = ".//div[@class='input pr-6 pl-6 input_type_text input_size_default']/input")
     private SelenideElement inputEmailField;
 
     //Поле ввода "Password" области "Вход" в теле страницы
-    @FindBy(how = How.XPATH, using = ".//div[@class='input__container']/div[@class='input pr-6 pl-6 input_type_password input_size_default']/input")
+    @FindBy(how = How.XPATH, using = ".//div[@class='input pr-6 pl-6 input_type_password input_size_default']/input")
     private SelenideElement inputPasswordField;
 
     //Ссылка "Войти" в теле страницы
@@ -64,7 +64,7 @@ public class LoginPage {
     //Метод проверяет, что открыта страница входа на сайт
     @Step("Check what login page is open")
     public void loginPageOpenCheck() {
-        webdriver().shouldHave(url(loginPageAddress));
+        webdriver().shouldHave(url(LOGIN_PAGE_URL));
     }
 
 

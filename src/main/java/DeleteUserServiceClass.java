@@ -7,10 +7,10 @@ public class DeleteUserServiceClass {
 
 
     //URL адрес endpoint для авторизации пользователя
-    String authorizationUserEndpointURL = "https://stellarburgers.nomoreparties.site/api/auth/login";
+    private static final String AUTHORIZATION_ENDPOINT_URL = "https://stellarburgers.nomoreparties.site/api/auth/login";
 
     //URL адрес endpoint для удаления пользователя
-    String mainUserEndpointURL = "https://stellarburgers.nomoreparties.site/api/auth/user";
+    private static final String MAIN_USER_ENDPOINT_URL = "https://stellarburgers.nomoreparties.site/api/auth/user";
 
     //Служебный метод для создания полного набора данных для авторизации пользователя
     @Step("Create full user test authorization data")
@@ -28,7 +28,7 @@ public class DeleteUserServiceClass {
                 .and()
                 .body(regDataVariant)
                 .when()
-                .post(authorizationUserEndpointURL);
+                .post(AUTHORIZATION_ENDPOINT_URL);
         return authorizationUserUserResponse;
     }
 
@@ -38,7 +38,7 @@ public class DeleteUserServiceClass {
         Response userDeleteResponse = given()
                 .header("Authorization", userToken)
                 .and()
-                .delete(mainUserEndpointURL);
+                .delete(MAIN_USER_ENDPOINT_URL);
         return userDeleteResponse;
     }
 

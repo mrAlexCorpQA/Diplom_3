@@ -42,14 +42,14 @@ public class RegistrationTest {
     @DisplayName("User registration with incorrect password")
     @Description("User registration with incorrect password test")
     public void newUserRegistrationTestWithIncorrectPassword() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickHeaderLKButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.clickRegisterButton();
         RegisterPage registerPage = page(RegisterPage.class);
-        registerPage.fillRegFields(0, userName);
-        registerPage.fillRegFields(1, userEmail);
-        registerPage.fillRegFields(2, userIncorrectPassword);
+        registerPage.fillRegFieldName(userName);
+        registerPage.fillRegFieldEmail(userEmail);
+        registerPage.fillRegFieldPassword(userIncorrectPassword);
         registerPage.clickOnRegButton();
         registerPage.incorrectPasswordMessageCheck();
     }
@@ -59,14 +59,14 @@ public class RegistrationTest {
     @DisplayName("User registration")
     @Description("New user registration test")
     public void newUserRegistrationTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickHeaderLKButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.clickRegisterButton();
         RegisterPage registerPage = page(RegisterPage.class);
-        registerPage.fillRegFields(0, userName);
-        registerPage.fillRegFields(1, userEmail);
-        registerPage.fillRegFields(2, userCorrectPassword);
+        registerPage.fillRegFieldName(userName);
+        registerPage.fillRegFieldEmail(userEmail);
+        registerPage.fillRegFieldPassword(userCorrectPassword);
         registerPage.clickOnRegButton();
         loginPage.loginPageOpenCheck();
     }

@@ -6,18 +6,32 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class BurgerConstructorTest {
 
-    //Проверка кликов на разделы конструктора бургеров на главной странице
+
+    //Проверка перехода на раздел конструктора бургеров Булки на главной странице
     @Test
-    @DisplayName("Click on burger construction chapters on main page")
-    @Description("Click on burger construction chapters on main page test")
-    public void burgerConstructionFirstChapterClickTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
-        mainPage.clickOnConstructorChapterSelector(1);
-        mainPage.dragAndDropSauceToBasket();
-        mainPage.clickOnConstructorChapterSelector(2);
-        mainPage.dragAndDropFillingToBasket();
-        mainPage.clickOnConstructorChapterSelector(0);
-        mainPage.dragAndDropBunToBasket();
+    @DisplayName("Check Bun burger construction chapters on main page")
+    @Description("Check Bun burger construction chapters on main page test")
+    public void burgerConstructionBunChapterTest() {
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
+        mainPage.bunSelectorCheck();
+    }
+
+    //Проверка перехода на раздел конструктора бургеров Соусы на главной странице
+    @Test
+    @DisplayName("Check Souse burger construction chapters on main page")
+    @Description("Check Souse burger construction chapters on main page test")
+    public void burgerConstructionSouseChapterTest() {
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
+        mainPage.souseSelectorCheck();
+    }
+
+    //Проверка перехода на раздел конструктора бургеров Начинки на главной странице
+    @Test
+    @DisplayName("Check Filling burger construction chapters on main page")
+    @Description("Check Filling burger construction chapters on main page test")
+    public void burgerConstructionFillingChapterTest() {
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
+        mainPage.fillingSelectorCheck();
     }
 
 

@@ -25,10 +25,10 @@ public class LoginTest {
     @DisplayName("User registration")
     @Description("New user registration")
     public static void newUserRegistration() {
-        RegisterPage registerPage = open(RegisterPage.registerPageAddress, RegisterPage.class);
-        registerPage.fillRegFields(0, userName);
-        registerPage.fillRegFields(1, userEmail);
-        registerPage.fillRegFields(2, userCorrectPassword);
+        RegisterPage registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
+        registerPage.fillRegFieldName(userName);
+        registerPage.fillRegFieldEmail(userEmail);
+        registerPage.fillRegFieldPassword(userCorrectPassword);
         registerPage.clickOnRegButton();
     }
 
@@ -50,7 +50,7 @@ public class LoginTest {
     @DisplayName("Logout user after test")
     @Description("Logout user after test")
     public void userLogoutAfterEachTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
         mainPage.mainPageOpenCheck();
         mainPage.clickHeaderLKButton();
@@ -65,7 +65,7 @@ public class LoginTest {
     @DisplayName("login from enter account button on main page")
     @Description("login from enter account button on main page test")
     public void mainPageAuthButtonTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickBodyAuthButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.fillAuthForm(userEmail, userCorrectPassword);
@@ -78,7 +78,7 @@ public class LoginTest {
     @DisplayName("login from Lk button on main page header")
     @Description("login from Lk button on main page header test")
     public void mainPageLKAuthButtonTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickHeaderLKButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.fillAuthForm(userEmail, userCorrectPassword);
@@ -91,7 +91,7 @@ public class LoginTest {
     @DisplayName("login from registration form on registration page")
     @Description("login from registration form on registration page test")
     public void authFromRegPageTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickBodyAuthButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.clickRegisterButton();
@@ -108,7 +108,7 @@ public class LoginTest {
     @DisplayName("login from password restore page")
     @Description("login from password restore page test")
     public void authFromPasswordRestorePageTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickBodyAuthButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.clickRestorePasswordLink();

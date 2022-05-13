@@ -29,10 +29,10 @@ public class UserCabinetTest {
     @DisplayName("User registration abefore tests")
     @Description("User registration before tests")
     public static void userRegistrationBeforeTests() {
-        RegisterPage registerPage = open(RegisterPage.registerPageAddress, RegisterPage.class);
-        registerPage.fillRegFields(0, userName);
-        registerPage.fillRegFields(1, userEmail);
-        registerPage.fillRegFields(2, userCorrectPassword);
+        RegisterPage registerPage = open(RegisterPage.REGISTER_PAGE_URL, RegisterPage.class);
+        registerPage.fillRegFieldName(userName);
+        registerPage.fillRegFieldEmail(userEmail);
+        registerPage.fillRegFieldPassword(userCorrectPassword);
         registerPage.clickOnRegButton();
     }
 
@@ -54,7 +54,7 @@ public class UserCabinetTest {
     @DisplayName("Logout user after test")
     @Description("Logout user after test")
     public void userLogoutAfterEachTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         LoginPage loginPage = page(LoginPage.class);
         mainPage.mainPageOpenCheck();
         mainPage.clickHeaderLKButton();
@@ -70,7 +70,7 @@ public class UserCabinetTest {
     @DisplayName("Check redirect to Lk page after authorization")
     @Description("Check redirect to Lk page after authorization test")
     public void lkRedirectAfterAuthTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickBodyAuthButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.fillAuthForm(userEmail, userCorrectPassword);
@@ -86,7 +86,7 @@ public class UserCabinetTest {
     @DisplayName("Check redirect to main page after click on logo in header")
     @Description("Check redirect to main page after click on logo in header test")
     public void lkLogoCheckRedirectTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickBodyAuthButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.fillAuthForm(userEmail, userCorrectPassword);
@@ -104,7 +104,7 @@ public class UserCabinetTest {
     @DisplayName("Check redirect to main page after click on Constructor link in header")
     @Description("Check redirect to main page after click on Constructor link in header test")
     public void lkConstructorLinkCheckRedirectTest() {
-        MainPage mainPage = open(MainPage.mainPageAddress, MainPage.class);
+        MainPage mainPage = open(MainPage.MAIN_PAGE_URL, MainPage.class);
         mainPage.clickBodyAuthButton();
         LoginPage loginPage = page(LoginPage.class);
         loginPage.fillAuthForm(userEmail, userCorrectPassword);
